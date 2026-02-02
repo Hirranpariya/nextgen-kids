@@ -15,13 +15,13 @@ const LandingPage = () => {
             <FlowVisual />
 
             {/* Footer */}
-            <footer style={{ background: '#2d3748', color: 'white', padding: '4rem 0' }}>
-                <div className="container" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                    <p>© 2026 NextGen Kids. Safety first, fun always.</p>
-                    <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem', opacity: 0.7 }}>
-                        <a href="#">Privacy Policy</a>
-                        <a href="#">Terms of Service</a>
-                        <a href="#">Parent Guide</a>
+            <footer style={{ background: '#1a202c', color: 'white', padding: '4rem 0', marginTop: '4rem' }}>
+                <div className="container flex flex-col items-center gap-4 text-center">
+                    <p className="text-lg font-bold" style={{ opacity: 0.9 }}>© 2026 NextGen Kids. Safety first, fun always.</p>
+                    <div className="flex gap-4 justify-center" style={{ opacity: 0.7 }}>
+                        <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+                        <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+                        <a href="#" className="hover:text-white transition-colors">Parent Guide</a>
                     </div>
                 </div>
             </footer>

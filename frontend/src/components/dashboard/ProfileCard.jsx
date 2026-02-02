@@ -15,19 +15,8 @@ const ProfileCard = ({ name, age, theme, progress, avatar }) => {
     return (
         <motion.div
             whileHover={{ y: -5 }}
-            style={{
-                background: 'white',
-                borderRadius: '24px',
-                padding: '1.5rem',
-                boxShadow: 'var(--shadow-sm)',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                textAlign: 'center',
-                border: '1px solid #edf2f7',
-                position: 'relative',
-                overflow: 'hidden'
-            }}
+            className="card flex flex-col items-center text-center relative overflow-hidden"
+            style={{ padding: '1.5rem' }}
         >
             {/* Theme Badge */}
             <div style={{
@@ -58,12 +47,12 @@ const ProfileCard = ({ name, age, theme, progress, avatar }) => {
                 {avatar || '👶'}
             </div>
 
-            <h3 style={{ fontSize: '1.25rem', marginBottom: '0.25rem' }}>{name}</h3>
-            <div style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '1.5rem' }}>Age {age}</div>
+            <h3 className="text-lg font-bold mb-1">{name}</h3>
+            <div className="text-sm text-muted mb-6">Age {age}</div>
 
             {/* Progress Mini Bar */}
-            <div style={{ width: '100%', marginBottom: '1.5rem' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '0.25rem' }}>
+            <div className="w-full mb-6" style={{ width: '100%' }}>
+                <div className="flex-between text-sm text-muted mb-1">
                     <span>Daily Goal</span>
                     <span>{progress}%</span>
                 </div>
@@ -72,7 +61,7 @@ const ProfileCard = ({ name, age, theme, progress, avatar }) => {
                 </div>
             </div>
 
-            <Button variant="secondary" size="sm" icon={Play} style={{ width: '100%', justifyContent: 'center' }}>
+            <Button variant="secondary" size="sm" icon={Play} className="w-full justify-center" style={{ width: '100%' }}>
                 Launch Mode
             </Button>
         </motion.div>

@@ -1,14 +1,60 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { User, Mail, Lock, Gift, ArrowRight, ArrowLeft } from 'lucide-react';
 import Button from '../../components/ui/Button';
 import Input from '../../components/ui/Input';
 import ProgressBar from '../../components/ui/ProgressBar';
+import { useAuth } from '../../hooks/useAuth';
 
 const RegisterPage = () => {
+    const { register } = useAuth();
+    const navigate = useNavigate();
     const [step, setStep] = useState(1);
     const totalSteps = 3;
+
+    // Form State
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        password: '',
+        childName: '',
+        childAge: '',
+        pin: ['', '', '', '']
+    });
+
+    const updateForm = (field, value) => {
+        setFormData(prev => ({ ...prev, [field]: value }));
+    };
+
+    const handlePinChange = (index, value) => {
+        if (value.length > 1) return;
+        const newPin = [...formData.pin];
+        newPin[index] = value;
+        setFormData(prev => ({ ...prev, pin: newPin }));
+
+        // Auto-focus next input
+        if (value && index < 3) {
+            document.getElementById(`pin-${index + 1}`).focus();
+        }
+    };
+
+    const handleRegister = async () => {
+        try {
+            await register({
+                name: formData.name,
+                email: formData.email,
+                child: {
+                    name: formData.childName,
+                    age: formData.childAge
+                }
+            });
+            navigate('/parent/dashboard');
+        } catch (error) {
+            console.error("Registration failed", error);
+            // In a real app, handle error UI here
+        }
+    };
 
     const nextStep = () => setStep((prev) => Math.min(prev + 1, totalSteps));
     const prevStep = () => setStep((prev) => Math.max(prev - 1, 1));
@@ -39,13 +85,10 @@ const RegisterPage = () => {
             justifyContent: 'center',
             padding: '2rem'
         }}>
-            <div style={{
+            <div className="card" style={{
                 width: '100%',
                 maxWidth: '500px',
-                background: 'white',
-                borderRadius: '32px',
                 padding: '3rem',
-                boxShadow: '0 20px 60px rgba(0,0,0,0.08)',
                 position: 'relative'
             }}>
                 {/* Header */}
@@ -70,9 +113,29 @@ const RegisterPage = () => {
                                 transition={{ duration: 0.3 }}
                             >
                                 <h3 style={{ marginBottom: '1.5rem', fontSize: '1.2rem' }}>About You (The Guardian)</h3>
-                                <Input label="Full Name" placeholder="Jane Doe" icon={User} autoFocus />
-                                <Input label="Email Address" placeholder="jane@family.com" icon={Mail} />
-                                <Input label="Create Password" type="password" placeholder="••••••••" icon={Lock} />
+                                <Input
+                                    label="Full Name"
+                                    placeholder="Jane Doe"
+                                    icon={User}
+                                    autoFocus
+                                    value={formData.name}
+                                    onChange={(e) => updateForm('name', e.target.value)}
+                                />
+                                <Input
+                                    label="Email Address"
+                                    placeholder="jane@family.com"
+                                    icon={Mail}
+                                    value={formData.email}
+                                    onChange={(e) => updateForm('email', e.target.value)}
+                                />
+                                <Input
+                                    label="Create Password"
+                                    type="password"
+                                    placeholder="••••••••"
+                                    icon={Lock}
+                                    value={formData.password}
+                                    onChange={(e) => updateForm('password', e.target.value)}
+                                />
                             </motion.div>
                         )}
 
@@ -99,8 +162,22 @@ const RegisterPage = () => {
                                     <div style={{ fontSize: '2rem' }}>🎁</div>
                                     <p style={{ fontSize: '0.9rem', color: '#276749' }}>We'll customize the experience based on their age!</p>
                                 </div>
-                                <Input label="Child's Name" placeholder="Tommy" icon={User} autoFocus />
-                                <Input label="Age" type="number" placeholder="5" icon={Gift} />
+                                <Input
+                                    label="Child's Name"
+                                    placeholder="Tommy"
+                                    icon={User}
+                                    autoFocus
+                                    value={formData.childName}
+                                    onChange={(e) => updateForm('childName', e.target.value)}
+                                />
+                                <Input
+                                    label="Age"
+                                    type="number"
+                                    placeholder="5"
+                                    icon={Gift}
+                                    value={formData.childAge}
+                                    onChange={(e) => updateForm('childAge', e.target.value)}
+                                />
                             </motion.div>
                         )}
 
@@ -120,11 +197,14 @@ const RegisterPage = () => {
                                 </p>
 
                                 <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginBottom: '2rem' }}>
-                                    {[1, 2, 3, 4].map((i) => (
+                                    {[0, 1, 2, 3].map((i) => (
                                         <input
                                             key={i}
+                                            id={`pin-${i}`}
                                             type="password"
                                             maxLength={1}
+                                            value={formData.pin[i]}
+                                            onChange={(e) => handlePinChange(i, e.target.value)}
                                             style={{
                                                 width: '60px',
                                                 height: '70px',
@@ -165,7 +245,7 @@ const RegisterPage = () => {
                             Next <ArrowRight size={20} />
                         </Button>
                     ) : (
-                        <Button variant="bouncy" style={{ background: '#48BB78' }}>
+                        <Button variant="bouncy" style={{ background: '#48BB78' }} onClick={handleRegister}>
                             Create Account 🚀
                         </Button>
                     )}

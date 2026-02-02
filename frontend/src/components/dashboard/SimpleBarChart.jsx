@@ -5,9 +5,9 @@ const SimpleBarChart = ({ data }) => {
     const maxVal = Math.max(...data.map(d => d.value));
 
     return (
-        <div style={{ display: 'flex', alignItems: 'flex-end', gap: '1rem', height: '200px', paddingTop: '2rem' }}>
+        <div className="flex items-end gap-2 h-[200px] pt-8" style={{ height: '200px' }}>
             {data.map((item, index) => (
-                <div key={index} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
+                <div key={index} className="flex-1 flex flex-col items-center gap-2" style={{ flex: 1 }}>
                     <motion.div
                         initial={{ height: 0 }}
                         animate={{ height: `${(item.value / maxVal) * 100}%` }}
@@ -20,7 +20,7 @@ const SimpleBarChart = ({ data }) => {
                             opacity: 0.8
                         }}
                     />
-                    <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: '600' }}>{item.day}</div>
+                    <div className="text-xs font-bold text-muted">{item.day}</div>
                 </div>
             ))}
         </div>

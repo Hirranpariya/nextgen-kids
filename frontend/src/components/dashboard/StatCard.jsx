@@ -4,15 +4,8 @@ import { motion } from 'framer-motion';
 const StatCard = ({ label, value, trend, icon: Icon, color }) => (
     <motion.div
         whileHover={{ y: -5 }}
-        style={{
-            background: 'white',
-            padding: '1.5rem',
-            borderRadius: '20px',
-            boxShadow: 'var(--shadow-sm)',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '1.5rem'
-        }}
+        className="card flex items-center gap-4"
+        style={{ padding: '1.5rem' }} // keeping padding explicit if needed or use p-6
     >
         <div style={{
             width: '60px',
@@ -27,10 +20,10 @@ const StatCard = ({ label, value, trend, icon: Icon, color }) => (
             <Icon size={28} />
         </div>
         <div>
-            <div style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '0.25rem' }}>{label}</div>
-            <div style={{ fontSize: '1.8rem', fontWeight: '800', lineHeight: 1 }}>{value}</div>
+            <div className="text-sm text-muted mb-1">{label}</div>
+            <div className="text-xl font-bold leading-none">{value}</div>
             {trend && (
-                <div style={{ fontSize: '0.8rem', color: trend > 0 ? '#48BB78' : '#F56565', marginTop: '0.25rem', fontWeight: '600' }}>
+                <div style={{ fontSize: '0.8rem', color: trend > 0 ? '#48BB78' : '#F56565', marginTop: '0.4rem', fontWeight: '600' }}>
                     {trend > 0 ? '+' : ''}{trend}% this week
                 </div>
             )}

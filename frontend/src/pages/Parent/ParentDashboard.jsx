@@ -3,7 +3,8 @@ import ParentLayout from '../../layouts/ParentLayout';
 import StatCard from '../../components/dashboard/StatCard';
 import ProfileCard from '../../components/dashboard/ProfileCard';
 import SimpleBarChart from '../../components/dashboard/SimpleBarChart';
-import { Clock, Star, Brain, AlertCircle } from 'lucide-react';
+import { Clock, Star, Brain, AlertCircle, Plus } from 'lucide-react';
+import Button from '../../components/ui/Button';
 
 const ParentDashboard = () => {
     const chartData = [
@@ -16,33 +17,32 @@ const ParentDashboard = () => {
         { day: 'Sun', value: 70 },
     ];
 
+    const handleAddChild = () => {
+        alert("Add Child feature coming soon!");
+    };
+
     return (
         <ParentLayout>
-            <div style={{ marginBottom: '2rem' }}>
-                <h1 style={{ fontSize: '1.8rem', marginBottom: '0.5rem' }}>Dashboard Overview</h1>
-                <p style={{ color: 'var(--text-muted)' }}>Welcome back, Jane. Here's how the kids are doing.</p>
+            <div className="mb-6">
+                <h1 className="text-title" style={{ fontSize: '2rem' }}>Dashboard Overview</h1>
+                <p className="text-muted">Welcome back, Jane. Here's how the kids are doing.</p>
             </div>
 
             {/* Stats Row */}
-            <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-                gap: '1.5rem',
-                marginBottom: '3rem'
-            }}>
+            <div className="grid grid-auto-fit gap-4 mb-8">
                 <StatCard icon={Clock} label="Total Screen Time" value="2h 15m" trend={-5} color="#63B3ED" />
                 <StatCard icon={Brain} label="Activities Done" value="12" trend={15} color="#9F7AEA" />
                 <StatCard icon={Star} label="Skills Mastered" value="5" trend={8} color="#F687B3" />
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '2rem' }}>
+            <div className="grid gap-6" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
                 {/* Main Column */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                <div className="flex flex-col gap-6">
                     {/* Chart Section */}
-                    <div style={{ background: 'white', padding: '2rem', borderRadius: '24px', boxShadow: 'var(--shadow-sm)' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                            <h3 style={{ fontSize: '1.2rem' }}>Activity this Week</h3>
-                            <select style={{ padding: '0.5rem', borderRadius: '8px', border: '1px solid #edf2f7' }}>
+                    <div className="card">
+                        <div className="flex-between mb-4">
+                            <h3 className="text-lg font-bold">Activity this Week</h3>
+                            <select className="input-base" style={{ width: 'auto', padding: '0.4rem 1rem' }}>
                                 <option>All Kids</option>
                                 <option>Tommy</option>
                                 <option>Sarah</option>
@@ -52,14 +52,14 @@ const ParentDashboard = () => {
                     </div>
 
                     {/* Alerts Section */}
-                    <div style={{ background: 'white', padding: '2rem', borderRadius: '24px', boxShadow: 'var(--shadow-sm)' }}>
-                        <h3 style={{ fontSize: '1.2rem', marginBottom: '1.5rem' }}>Recent Alerts</h3>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                            <div style={{ display: 'flex', gap: '1rem', padding: '1rem', background: '#FFF5F5', borderRadius: '12px', color: '#C53030' }}>
+                    <div className="card">
+                        <h3 className="text-lg font-bold mb-4">Recent Alerts</h3>
+                        <div className="flex flex-col gap-2">
+                            <div className="flex items-center gap-3 p-4 rounded-xl" style={{ background: '#FFF5F5', color: '#C53030' }}>
                                 <AlertCircle size={24} />
                                 <div>
-                                    <div style={{ fontWeight: '700' }}>Screen Time Limit Reached</div>
-                                    <div style={{ fontSize: '0.9rem' }}>Tommy hit his 1h limit on "Arcade" genre.</div>
+                                    <div className="font-bold">Screen Time Limit Reached</div>
+                                    <div className="text-sm">Tommy hit his 1h limit on "Arcade" genre.</div>
                                 </div>
                             </div>
                         </div>
@@ -68,12 +68,14 @@ const ParentDashboard = () => {
 
                 {/* Right Column: Profiles */}
                 <div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-                        <h3 style={{ fontSize: '1.2rem' }}>My Kids</h3>
-                        <button style={{ color: 'var(--color-primary)', fontWeight: '700', fontSize: '0.9rem' }}>+ Add New</button>
+                    <div className="flex-between mb-6">
+                        <h3 className="text-lg font-bold">My Kids</h3>
+                        <Button variant="ghost" size="sm" onClick={handleAddChild} icon={Plus} style={{ color: 'var(--color-primary)' }}>
+                            Add New
+                        </Button>
                     </div>
 
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                    <div className="flex flex-col gap-4">
                         <ProfileCard
                             name="Tommy"
                             age={5}

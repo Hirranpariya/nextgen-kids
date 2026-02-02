@@ -40,7 +40,7 @@ const FeatureCard = ({ icon: Icon, title, desc, delay }) => (
 
 const Features = () => {
     return (
-        <section id="features" style={{ padding: '8rem 0', background: '#f8faff' }}>
+        <section id="parents" style={{ padding: '8rem 0', background: '#f8faff' }}>
             <div className="container">
                 <div style={{ textAlign: 'center', maxWidth: '700px', margin: '0 auto 5rem auto' }}>
                     <h2 style={{ fontSize: '3rem', marginBottom: '1.5rem' }}>Parents Love Us too.</h2>
