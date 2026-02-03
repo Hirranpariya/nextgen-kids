@@ -49,7 +49,15 @@ const RegisterPage = () => {
                     age: formData.childAge
                 }
             });
-            navigate('/parent/dashboard');
+
+            // Auto-redirect based on age
+            const age = parseInt(formData.childAge);
+            if (age >= 3 && age <= 5) {
+                navigate('/dashboard/toddler');
+            } else {
+                navigate('/parent/dashboard');
+            }
+
         } catch (error) {
             console.error("Registration failed", error);
             // In a real app, handle error UI here

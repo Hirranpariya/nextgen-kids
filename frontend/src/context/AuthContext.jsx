@@ -5,12 +5,25 @@ export const AuthContext = createContext(null);
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [activeChild, setActiveChild] = useState(() => {
+        try {
+            const stored = localStorage.getItem('nextgen_active_child');
+            return stored ? JSON.parse(stored) : null;
+        } catch (error) {
+            console.error("Failed to parse active child", error);
+            return null;
+        }
+    });
 
     // Simulate checking for a logged-in user on mount
     useEffect(() => {
-        const storedUser = localStorage.getItem('nextgen_user');
-        if (storedUser) {
-            setUser(JSON.parse(storedUser));
+        try {
+            const storedUser = localStorage.getItem('nextgen_user');
+            if (storedUser) {
+                setUser(JSON.parse(storedUser));
+            }
+        } catch (e) {
+            console.error("Failed to restore user", e);
         }
         setLoading(false);
     }, []);
@@ -19,13 +32,14 @@ export const AuthProvider = ({ children }) => {
         // Mock API Call
         return new Promise((resolve, reject) => {
             setTimeout(() => {
+                // Allow any login for now as requested
                 if (email && password) {
                     const mockUser = {
                         id: '123',
                         name: 'Jane Doe',
                         email: email,
                         role: 'parent',
-                        children: [{ name: 'Tommy', age: 5, theme: 'toddler' }]
+                        children: [{ id: 'c1', name: 'Tommy', age: 5, theme: 'toddler', avatar: '🦁' }]
                     };
                     setUser(mockUser);
                     localStorage.setItem('nextgen_user', JSON.stringify(mockUser));
@@ -45,7 +59,7 @@ export const AuthProvider = ({ children }) => {
                     id: Date.now().toString(),
                     ...userData,
                     role: 'parent',
-                    children: [userData.child] // Assuming simplified structure for now
+                    children: [{ ...userData.child, id: Date.now().toString(), avatar: '👶' }]
                 };
                 setUser(newUser);
                 localStorage.setItem('nextgen_user', JSON.stringify(newUser));
@@ -56,11 +70,52 @@ export const AuthProvider = ({ children }) => {
 
     const logout = () => {
         setUser(null);
+        setActiveChild(null);
         localStorage.removeItem('nextgen_user');
+        localStorage.removeItem('nextgen_active_child');
+    };
+
+    const selectChild = (child) => {
+        setActiveChild(child);
+        localStorage.setItem('nextgen_active_child', JSON.stringify(child));
+    };
+
+    const exitChildMode = () => {
+        setActiveChild(null);
+        localStorage.removeItem('nextgen_active_child');
+    };
+
+    // Add child to user profile
+    const addChild = (childData) => {
+        const updatedUser = {
+            ...user,
+            children: [...(user.children || []), { ...childData, id: Date.now().toString() }]
+        };
+        setUser(updatedUser);
+        localStorage.setItem('nextgen_user', JSON.stringify(updatedUser));
+    };
+
+    // Update child profile
+    const updateChild = (childId, updatedData) => {
+        if (!user || !user.children) return;
+
+        const updatedChildren = user.children.map(c =>
+            c.id === childId ? { ...c, ...updatedData } : c
+        );
+        const updatedUser = { ...user, children: updatedChildren };
+        setUser(updatedUser);
+        localStorage.setItem('nextgen_user', JSON.stringify(updatedUser));
+
+        // If updating the active child, update that state too
+        if (activeChild && activeChild.id === childId) {
+            const newActive = { ...activeChild, ...updatedData };
+            setActiveChild(newActive);
+            localStorage.setItem('nextgen_active_child', JSON.stringify(newActive));
+        }
     };
 
     return (
-        <AuthContext.Provider value={{ user, login, register, logout, loading }}>
+        <AuthContext.Provider value={{ user, login, register, logout, loading, activeChild, selectChild, exitChildMode, addChild, updateChild }}>
             {children}
         </AuthContext.Provider>
     );

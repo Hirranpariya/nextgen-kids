@@ -43,9 +43,15 @@ const LoginPage = () => {
                 </div>
 
                 <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                    <div style={{ background: '#ebf8ff', padding: '0.75rem', borderRadius: '8px', fontSize: '0.85rem', color: '#2c5282', textAlign: 'center' }}>
+                        <strong>Demo Credentials:</strong><br />
+                        Email: demo@parent.com<br />
+                        Pass: password123
+                    </div>
+
                     <Input
                         label="Email Address"
-                        placeholder="jane@family.com"
+                        placeholder="demo@parent.com"
                         icon={Mail}
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}

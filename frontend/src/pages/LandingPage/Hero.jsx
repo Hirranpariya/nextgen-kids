@@ -1,7 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Play } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Button from '../../components/ui/Button';
+import HeroVisual from './HeroVisual';
 
 const Hero = () => {
     return (
@@ -89,100 +91,17 @@ const Hero = () => {
                     </p>
 
                     <div style={{ display: 'flex', gap: '1rem' }}>
-                        <Button variant="bouncy" size="lg" icon={Play}>Start Adventure</Button>
-                        <Button variant="secondary" size="lg">Parent Hub</Button>
+                        <Link to="/register">
+                            <Button variant="bouncy" size="lg" icon={Play}>Start Adventure</Button>
+                        </Link>
+                        <Link to="/login">
+                            <Button variant="secondary" size="lg">Parent Hub</Button>
+                        </Link>
                     </div>
                 </motion.div>
 
                 {/* Right Visual - Dashboard Preview */}
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                    style={{ position: 'relative', height: '600px', display: 'flex', alignItems: 'center' }}
-                >
-                    {/* Abstract Composition of Screens */}
-                    <div style={{
-                        width: '100%',
-                        height: 'auto',
-                        aspectRatio: '4/3',
-                        background: 'white',
-                        borderRadius: '24px',
-                        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-                        position: 'relative',
-                        zIndex: 2,
-                        overflow: 'hidden',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        transform: 'perspective(1000px) rotateY(-5deg) rotateX(5deg)',
-                        border: '4px solid white'
-                    }}>
-                        {/* Mock UI Header */}
-                        <div style={{ padding: '1.5rem', borderBottom: '2px solid #f0f0f0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#fff' }}>
-                            <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#FC8181' }}></div>
-                                <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#F6E05E' }}></div>
-                                <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#68D391' }}></div>
-                            </div>
-                            <div style={{ width: '40%', height: '10px', background: '#f0f0f0', borderRadius: '5px' }}></div>
-                        </div>
-
-                        {/* Mock UI Content */}
-                        <div style={{ flex: 1, background: '#f8faff', padding: '1.5rem', display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '1.5rem' }}>
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                                <div style={{ height: '120px', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', borderRadius: '16px', position: 'relative', overflow: 'hidden' }}>
-                                    <div style={{ position: 'absolute', bottom: '1rem', left: '1rem', color: 'white', fontWeight: 'bold' }}>Continue Learning</div>
-                                </div>
-                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-                                    <div style={{ height: '100px', background: 'white', borderRadius: '16px', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)' }}></div>
-                                    <div style={{ height: '100px', background: 'white', borderRadius: '16px', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)' }}></div>
-                                </div>
-                            </div>
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                                <div style={{ height: '60px', background: 'white', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}></div>
-                                <div style={{ height: '60px', background: 'white', borderRadius: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}></div>
-                                <div style={{ flex: 1, background: 'linear-gradient(to bottom, #fff 0%, #f0f4f8 100%)', borderRadius: '16px', border: '1px dashed #cbd5e0' }}></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Floating Badge */}
-                    <motion.div
-                        animate={{ y: [0, -10, 0] }}
-                        transition={{ duration: 3, repeat: Infinity }}
-                        style={{
-                            position: 'absolute',
-                            bottom: '10%',
-                            right: '-5%',
-                            padding: '1rem 1.5rem',
-                            background: 'white',
-                            borderRadius: '16px',
-                            boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
-                            zIndex: 3,
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '1rem',
-                            border: '1px solid rgba(0,0,0,0.05)'
-                        }}
-                    >
-                        <div style={{
-                            width: '40px',
-                            height: '40px',
-                            background: '#F6E05E',
-                            borderRadius: '50%',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            fontSize: '1.2rem'
-                        }}>
-                            🏆
-                        </div>
-                        <div>
-                            <div style={{ fontWeight: '800', color: 'var(--text-main)', fontSize: '0.9rem' }}>Level Up!</div>
-                            <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>You learned "Patterns"</div>
-                        </div>
-                    </motion.div>
-                </motion.div>
+                <HeroVisual />
             </div>
         </section>
     );

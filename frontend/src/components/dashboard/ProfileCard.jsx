@@ -1,9 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Play } from 'lucide-react';
+import { Play, Edit2 } from 'lucide-react';
 import Button from '../ui/Button';
 
-const ProfileCard = ({ name, age, theme, progress, avatar }) => {
+const ProfileCard = ({ name, age, theme, progress, avatar, onLaunch, onEdit }) => {
     const themes = {
         toddler: { color: '#63B3ED', label: 'Toddler' },
         kid: { color: '#9F7AEA', label: 'Kid' },
@@ -22,7 +22,7 @@ const ProfileCard = ({ name, age, theme, progress, avatar }) => {
             <div style={{
                 position: 'absolute',
                 top: '1rem',
-                right: '1rem',
+                left: '1rem',
                 background: `${themeData.color}20`,
                 color: themeData.color,
                 padding: '0.25rem 0.75rem',
@@ -32,6 +32,22 @@ const ProfileCard = ({ name, age, theme, progress, avatar }) => {
             }}>
                 {themeData.label}
             </div>
+
+            {/* Edit Button */}
+            <button
+                onClick={(e) => { e.stopPropagation(); onEdit && onEdit(); }}
+                style={{
+                    position: 'absolute',
+                    top: '1rem',
+                    right: '1rem',
+                    background: 'none',
+                    border: 'none',
+                    color: '#A0AEC0',
+                    cursor: 'pointer'
+                }}
+            >
+                <Edit2 size={18} />
+            </button>
 
             <div style={{
                 width: '80px',
@@ -61,7 +77,7 @@ const ProfileCard = ({ name, age, theme, progress, avatar }) => {
                 </div>
             </div>
 
-            <Button variant="secondary" size="sm" icon={Play} className="w-full justify-center" style={{ width: '100%' }}>
+            <Button variant="secondary" size="sm" icon={Play} onClick={onLaunch} className="w-full justify-center" style={{ width: '100%' }}>
                 Launch Mode
             </Button>
         </motion.div>
