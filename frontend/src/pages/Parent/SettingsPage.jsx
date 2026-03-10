@@ -21,7 +21,7 @@ const SettingsPage = () => {
                 <p className="text-muted">Manage your profile and application preferences.</p>
             </div>
 
-            <div style={{ maxWidth: '800px' }}>
+            <div className="flex flex-col gap-6 w-full">
                 {/* Profile Section */}
                 <div className="card mb-6">
                     <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
@@ -61,7 +61,7 @@ const SettingsPage = () => {
                         </div>
                         <label className="relative inline-flex items-center cursor-pointer">
                             <input type="checkbox" checked={notifications} onChange={() => setNotifications(!notifications)} className="sr-only peer" />
-                            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                            <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:bg-blue-600 transition-colors after:content-[''] after:absolute after:top-[2px] after:left-[2px] border-gray-300 after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full"></div>
                         </label>
                     </div>
                 </div>

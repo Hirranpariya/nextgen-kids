@@ -1,9 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Play, Edit2 } from 'lucide-react';
+import { Play, Edit2, Info } from 'lucide-react';
 import Button from '../ui/Button';
 
-const ProfileCard = ({ name, age, theme, progress, avatar, onLaunch, onEdit }) => {
+const ProfileCard = ({ name, age, theme, progress, avatar, onLaunch, onEdit, onInfo }) => {
     const themes = {
         toddler: { color: '#63B3ED', label: 'Toddler' },
         kid: { color: '#9F7AEA', label: 'Kid' },
@@ -33,21 +33,23 @@ const ProfileCard = ({ name, age, theme, progress, avatar, onLaunch, onEdit }) =
                 {themeData.label}
             </div>
 
-            {/* Edit Button */}
-            <button
-                onClick={(e) => { e.stopPropagation(); onEdit && onEdit(); }}
-                style={{
-                    position: 'absolute',
-                    top: '1rem',
-                    right: '1rem',
-                    background: 'none',
-                    border: 'none',
-                    color: '#A0AEC0',
-                    cursor: 'pointer'
-                }}
-            >
-                <Edit2 size={18} />
-            </button>
+            {/* Action Buttons (Info & Edit) */}
+            <div style={{ position: 'absolute', top: '1rem', right: '1rem', display: 'flex', gap: '0.5rem', zIndex: 10 }}>
+                <button
+                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); onInfo && onInfo(); }}
+                    style={{ background: 'white', border: '1px solid #E2E8F0', color: '#4A5568', cursor: 'pointer', padding: '6px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}
+                    title="View Info"
+                >
+                    <Info size={16} />
+                </button>
+                <button
+                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); onEdit && onEdit(); }}
+                    style={{ background: 'white', border: '1px solid #E2E8F0', color: '#4A5568', cursor: 'pointer', padding: '6px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}
+                    title="Edit Profile"
+                >
+                    <Edit2 size={16} />
+                </button>
+            </div>
 
             <div style={{
                 width: '80px',
@@ -58,9 +60,14 @@ const ProfileCard = ({ name, age, theme, progress, avatar, onLaunch, onEdit }) =
                 fontSize: '3rem',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                overflow: 'hidden'
             }}>
-                {avatar || '👶'}
+                {avatar?.startsWith('data:image') ? (
+                    <img src={avatar} alt={`${name}'s avatar`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                ) : (
+                    avatar || '👶'
+                )}
             </div>
 
             <h3 className="text-lg font-bold mb-1">{name}</h3>

@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Award, User, GraduationCap } from 'lucide-react';
+import { Award, User, GraduationCap, Heart, Star } from 'lucide-react';
 
-const ProfileHeader = ({ name, age, gender, avatar, grade = "2nd Grade" }) => {
+const ProfileHeader = ({ name, age, gender, avatar, grade = "2nd Grade", favoriteSubject, hobbies }) => {
     return (
         <motion.div
             initial={{ y: -20, opacity: 0 }}
@@ -29,9 +29,14 @@ const ProfileHeader = ({ name, age, gender, avatar, grade = "2nd Grade" }) => {
                     alignItems: 'center',
                     justifyContent: 'center',
                     fontSize: '2.5rem',
-                    border: '3px solid #38B2AC'
+                    border: '3px solid #38B2AC',
+                    overflow: 'hidden'
                 }}>
-                    {avatar || '🧑‍🎓'}
+                    {avatar?.startsWith('data:image') ? (
+                        <img src={avatar} alt={`${name}'s avatar`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    ) : (
+                        avatar || '🧑‍🎓'
+                    )}
                 </div>
                 <div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.25rem' }}>
@@ -52,6 +57,20 @@ const ProfileHeader = ({ name, age, gender, avatar, grade = "2nd Grade" }) => {
                             <GraduationCap size={14} /> {grade}
                         </span>
                     </div>
+                    {(favoriteSubject || hobbies) && (
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginTop: '0.75rem', flexWrap: 'wrap' }}>
+                            {favoriteSubject && (
+                                <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', padding: '0.25rem 0.5rem', background: '#EBF4FF', color: '#2B6CB0', borderRadius: '8px', fontSize: '0.75rem', fontWeight: '700' }}>
+                                    <Star size={12} /> {favoriteSubject}
+                                </span>
+                            )}
+                            {hobbies && (
+                                <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', padding: '0.25rem 0.5rem', background: '#FCE8F3', color: '#B83280', borderRadius: '8px', fontSize: '0.75rem', fontWeight: '700' }}>
+                                    <Heart size={12} /> {hobbies}
+                                </span>
+                            )}
+                        </div>
+                    )}
                 </div>
             </div>
 

@@ -1,11 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { Shapes, Palette, Music, Move, Bike } from 'lucide-react';
 
-const ActivityCard = ({ icon: Icon, title, description, color, type }) => (
+const ActivityCard = ({ icon: Icon, title, description, color, type, route, onClick }) => (
     <motion.div
         whileHover={{ y: -5, scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
+        onClick={onClick}
         style={{
             background: 'white',
             borderRadius: '20px',
@@ -71,11 +73,13 @@ const ActivityCard = ({ icon: Icon, title, description, color, type }) => (
 );
 
 const ActivityMatrix = () => {
+    const navigate = useNavigate();
+
     const activities = [
-        { icon: Palette, title: "Colors Fun", description: "Match the bright colors!", color: "#F6E05E", type: "Cognitive" },
-        { icon: Shapes, title: "Shapes Sort", description: "Find the matching shapes.", color: "#4299E1", type: "Cognitive" },
-        { icon: Music, title: "Music Time", description: "Sing along with rhymes.", color: "#F687B3", type: "Sensory" },
-        { icon: Move, title: "Jump & Run", description: "Let's move your body!", color: "#48BB78", type: "Motor" },
+        { icon: Palette, title: "Colors Fun", description: "Match the bright colors!", color: "#F6E05E", type: "Cognitive", route: "/dashboard/toddler/activities/colors" },
+        { icon: Shapes, title: "Shapes Sort", description: "Find the matching shapes.", color: "#4299E1", type: "Cognitive", route: "/dashboard/toddler/activities/shapes" },
+        { icon: Music, title: "Music Time", description: "Sing along with rhymes.", color: "#F687B3", type: "Sensory", route: "/dashboard/toddler/activities/music" },
+        { icon: Move, title: "Jump & Run", description: "Let's move your body!", color: "#48BB78", type: "Motor", route: "/dashboard/toddler/activities/movement" },
     ];
 
     return (
@@ -86,11 +90,15 @@ const ActivityMatrix = () => {
             </div>
             <div style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-                gap: '1.5rem'
+                gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+                gap: '2rem'
             }}>
                 {activities.map((act, i) => (
-                    <ActivityCard key={i} {...act} />
+                    <ActivityCard 
+                        key={i} 
+                        {...act} 
+                        onClick={() => act.route && navigate(act.route)}
+                    />
                 ))}
             </div>
         </div>

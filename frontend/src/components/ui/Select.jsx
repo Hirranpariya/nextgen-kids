@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
-const Input = ({ label, type = 'text', placeholder, icon: Icon, ...props }) => {
+const Select = ({ label, options, icon: Icon, value, onChange, ...props }) => {
     const [isFocused, setIsFocused] = useState(false);
 
     return (
@@ -32,10 +32,10 @@ const Input = ({ label, type = 'text', placeholder, icon: Icon, ...props }) => {
                         <Icon size={20} />
                     </div>
                 )}
-                <motion.input
+                <motion.select
                     layout
-                    type={type}
-                    placeholder={placeholder}
+                    value={value || ''}
+                    onChange={onChange}
                     onFocus={() => setIsFocused(true)}
                     onBlur={() => setIsFocused(false)}
                     style={{
@@ -49,17 +49,34 @@ const Input = ({ label, type = 'text', placeholder, icon: Icon, ...props }) => {
                         fontSize: '1rem',
                         fontFamily: 'var(--font-body)',
                         transition: 'background 0.3s ease',
-                        boxSizing: 'border-box' // Ensure padding doesn't increase width
+                        appearance: 'none',
+                        color: value ? 'inherit' : 'var(--text-muted)',
+                        boxSizing: 'border-box'
                     }}
                     animate={{
                         scale: isFocused ? 1.02 : 1,
                         boxShadow: isFocused ? '0 10px 25px -5px rgba(99, 102, 241, 0.15)' : 'none'
                     }}
                     {...props}
-                />
+                >
+                    <option value="" disabled>Select {label}</option>
+                    {options.map((opt, i) => (
+                        <option key={i} value={opt.value || opt}>{opt.label || opt}</option>
+                    ))}
+                </motion.select>
+                <div style={{
+                    position: 'absolute',
+                    right: '16px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    pointerEvents: 'none',
+                    color: 'var(--text-muted)'
+                }}>
+                    ▼
+                </div>
             </div>
         </div>
     );
 };
 
-export default Input;
+export default Select;

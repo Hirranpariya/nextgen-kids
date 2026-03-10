@@ -57,7 +57,7 @@ const AcademicSection = () => {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem' }}>
                 <SubjectCard title="Reading & Stories" icon={BookOpen} color="#DD6B20" bg="#FBD38D" />
                 <SubjectCard title="Fun Math" icon={Calculator} color="#38A169" bg="#9AE6B4" />
-                <SubjectCard title="Logical Thinking" icon={Binary} color="#805AD5" bg="#D6BCFA" />
+                <SubjectCard title="Think & Learn" icon={Binary} color="#805AD5" bg="#D6BCFA" />
                 <SubjectCard title="Basic Science" icon={Microscope} color="#3182CE" bg="#90CDF4" />
             </div>
         </div>
