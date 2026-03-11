@@ -18,7 +18,7 @@ const ParentGuidance = () => {
     const [isOpen, setIsOpen] = useState(true);
 
     return (
-        <div style={{ marginTop: '3rem', background: '#F0FFF4', borderRadius: '24px', padding: '1.5rem', border: '1px solid #C6F6D5' }}>
+        <div style={{ background: '#F0FFF4', borderRadius: '24px', padding: '1.5rem', border: '1px solid #C6F6D5' }}>
             <div
                 onClick={() => setIsOpen(!isOpen)}
                 style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', marginBottom: isOpen ? '1.5rem' : 0 }}

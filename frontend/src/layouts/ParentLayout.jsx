@@ -172,7 +172,7 @@ const ParentLayout = ({ children }) => {
                     backdropFilter: 'blur(10px)',
                     position: 'sticky',
                     top: 0,
-                    zIndex: 10
+                    zIndex: 40
                 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                         <button
@@ -193,14 +193,54 @@ const ParentLayout = ({ children }) => {
                         </div>
                     </div>
 
-                    <div style={{ display: 'flex', gap: '1rem' }}>
-                        <div style={{ background: 'white', padding: '0.5rem', borderRadius: '50%', boxShadow: 'var(--shadow-sm)', cursor: 'pointer' }}>
-                            <Search size={20} color="var(--text-muted)" />
-                        </div>
-                        <div style={{ background: 'white', padding: '0.5rem', borderRadius: '50%', boxShadow: 'var(--shadow-sm)', cursor: 'pointer', position: 'relative' }}>
-                            <Bell size={20} color="var(--text-muted)" />
-                            <div style={{ position: 'absolute', top: 2, right: 2, width: 8, height: 8, background: 'red', borderRadius: '50%' }} />
-                        </div>
+                    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                        <motion.button 
+                            whileHover={{ scale: 1.05, backgroundColor: '#f0f4f8' }}
+                            whileTap={{ scale: 0.95 }}
+                            style={{ 
+                                background: 'white', 
+                                padding: '0.6rem', 
+                                borderRadius: '50%', 
+                                boxShadow: '0 2px 5px rgba(0,0,0,0.05)', 
+                                border: '1px solid #edf2f7',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                cursor: 'pointer'
+                            }}
+                        >
+                            <Search size={22} color="#4a5568" />
+                        </motion.button>
+                        
+                        <motion.button 
+                            whileHover={{ scale: 1.05, backgroundColor: '#f0f4f8' }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={() => navigate('/parent/notifications')}
+                            style={{ 
+                                background: 'white', 
+                                padding: '0.6rem', 
+                                borderRadius: '50%', 
+                                boxShadow: '0 2px 5px rgba(0,0,0,0.05)', 
+                                border: '1px solid #edf2f7',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                position: 'relative',
+                                cursor: 'pointer'
+                            }}
+                        >
+                            <Bell size={22} color="#4a5568" />
+                            <div style={{ 
+                                position: 'absolute', 
+                                top: '0px', 
+                                right: '0px', 
+                                width: '10px', 
+                                height: '10px', 
+                                background: '#e53e3e', 
+                                borderRadius: '50%',
+                                border: '2px solid white'
+                            }} />
+                        </motion.button>
                     </div>
                 </header>
 

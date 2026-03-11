@@ -152,3 +152,22 @@ img {
     .grid-cols-2, .grid-cols-3 { grid-template-columns: 1fr; }
     .hide-mobile { display: none !important; }
 }
+
+/* Custom Scrollbar for Modals and Cards */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}

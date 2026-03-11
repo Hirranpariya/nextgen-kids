@@ -19,6 +19,12 @@ import Community from '../pages/Parent/Community';
 import SettingsPage from '../pages/Parent/SettingsPage';
 import HelpPage from '../pages/Parent/HelpPage';
 
+// Toddler Activities
+import ColorsFun from '../pages/Dashboard/Toddler/Activities/ColorsFun';
+import ShapesSort from '../pages/Dashboard/Toddler/Activities/ShapesSort';
+import MusicTime from '../pages/Dashboard/Toddler/Activities/MusicTime';
+import JumpAndRun from '../pages/Dashboard/Toddler/Activities/JumpAndRun';
+
 const AnimatedRoutes = () => {
     const location = useLocation();
 
@@ -41,6 +47,12 @@ const AnimatedRoutes = () => {
                 <Route path="/parent/community" element={<PageTransition><Community /></PageTransition>} />
                 <Route path="/parent/settings" element={<PageTransition><SettingsPage /></PageTransition>} />
                 <Route path="/parent/help" element={<PageTransition><HelpPage /></PageTransition>} />
+                
+                {/* Toddler Activity Routes */}
+                <Route path="/dashboard/toddler/activities/colors" element={<PageTransition><ColorsFun /></PageTransition>} />
+                <Route path="/dashboard/toddler/activities/shapes" element={<PageTransition><ShapesSort /></PageTransition>} />
+                <Route path="/dashboard/toddler/activities/music" element={<PageTransition><MusicTime /></PageTransition>} />
+                <Route path="/dashboard/toddler/activities/movement" element={<PageTransition><JumpAndRun /></PageTransition>} />
             </Routes>
         </AnimatePresence>
     );

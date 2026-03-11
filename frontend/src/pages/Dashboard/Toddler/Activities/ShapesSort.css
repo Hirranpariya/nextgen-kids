@@ -1,0 +1,274 @@
+/* ── ShapesSort CSS ── */
+.shapes-sort-container {
+  --red:#FF3B3B; --orange:#FF8C00; --yellow:#FFD700;
+  --green:#3CB371; --blue:#1E90FF; --purple:#9B59B6;
+  --pink:#FF69B4; --teal:#00BCD4; --bg:#F0F8FF;
+  
+  font-family:'Nunito',sans-serif;
+  background:var(--bg);
+  overflow-x:hidden;
+  min-height:100vh;
+}
+
+/* HEADER */
+.shapes-sort-container header {
+  background:linear-gradient(135deg,#4D96FF,#6BCB77,#FFD93D,#FF6B6B,#C77DFF);
+  background-size:400% 400%;
+  animation:gradientShift 6s ease infinite;
+  padding:22px 20px 18px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+@keyframes gradientShift{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+.shapes-sort-container .bubbles{position:absolute;inset:0;pointer-events:none;}
+.shapes-sort-container .bubble{
+  position:absolute;border-radius:50%;opacity:.22;
+  animation:floatUp 5s ease-in-out infinite;
+}
+@keyframes floatUp{
+  0%,100%{transform:translateY(0) scale(1);}
+  50%{transform:translateY(-28px) scale(1.1);}
+}
+.shapes-sort-container header h1{
+  font-family:'Fredoka One',cursive;
+  font-size:clamp(2.6rem,8vw,4.8rem);
+  color:#fff;
+  text-shadow:4px 4px 0 rgba(0,0,0,.15);
+  letter-spacing:2px;
+  animation:bounce 1.6s ease-in-out infinite alternate;
+  position:relative;
+  margin-bottom: 0.5rem;
+}
+@keyframes bounce{from{transform:translateY(0);}to{transform:translateY(-9px);}}
+.shapes-sort-container header p{
+  color:#fff;font-size:clamp(.95rem,3vw,1.35rem);
+  font-weight:800;margin-top:7px;
+  text-shadow:1px 1px 4px rgba(0,0,0,.2);
+  position:relative;
+}
+
+/* TABS */
+.shapes-sort-container .tabs{
+  display:flex;justify-content:center;
+  gap:10px;padding:22px 16px 6px;flex-wrap:wrap;
+}
+.shapes-sort-container .tab-btn{
+  font-family:'Fredoka One',cursive;font-size:1.1rem;
+  padding:11px 22px;border:none;border-radius:50px;
+  cursor:pointer;color:#fff;letter-spacing:.5px;
+  box-shadow:0 5px 0 rgba(0,0,0,.15);
+  transition:transform .2s,box-shadow .2s;
+}
+.shapes-sort-container .tab-btn:hover{transform:translateY(-3px);box-shadow:0 8px 0 rgba(0,0,0,.15);}
+.shapes-sort-container .tab-btn:active{transform:translateY(2px);box-shadow:0 2px 0 rgba(0,0,0,.15);}
+.shapes-sort-container .tab-btn.active{transform:translateY(2px);box-shadow:0 2px 0 rgba(0,0,0,.15);outline:3px solid #fff;}
+.shapes-sort-container #tb-sort  {background:var(--blue);}
+.shapes-sort-container #tb-learn {background:var(--green);}
+.shapes-sort-container #tb-trace {background:var(--purple);}
+.shapes-sort-container #tb-quiz  {background:var(--red);}
+
+/* SECTIONS */
+.shapes-sort-container section{display:none;padding:22px 16px 40px;max-width:920px;margin:0 auto;}
+.shapes-sort-container section.active{display:block;}
+.shapes-sort-container .sec-title{
+  font-family:'Fredoka One',cursive;font-size:2rem;
+  text-align:center;margin-bottom:22px;color:#333;
+}
+
+/* ── SORT GAME ── */
+.shapes-sort-container #sort-wrap{text-align:center;}
+.shapes-sort-container .sort-instruction{
+  font-size:1.2rem;font-weight:800;color:#555;
+  margin-bottom:18px;line-height:1.6;
+}
+/* Buckets */
+.shapes-sort-container .buckets-row{
+  display:flex;flex-wrap:wrap;
+  justify-content:center;gap:18px;margin-bottom:28px;
+}
+.shapes-sort-container .bucket{
+  width:110px;border-radius:20px 20px 26px 26px;
+  padding:12px 8px 14px;
+  display:flex;flex-direction:column;
+  align-items:center;gap:8px;
+  border:4px dashed rgba(0,0,0,.15);
+  transition:transform .2s,border-color .2s,background .2s;
+  cursor:pointer;min-height:140px;
+  position:relative;
+}
+.shapes-sort-container .bucket.highlight{
+  border-style:solid;border-color:rgba(0,0,0,.25);
+  transform:scale(1.06);
+}
+.shapes-sort-container .bucket .bucket-label{
+  font-family:'Fredoka One',cursive;
+  font-size:1rem;color:#fff;
+  text-shadow:1px 1px 3px rgba(0,0,0,.25);
+}
+.shapes-sort-container .bucket .bucket-shape{
+  width:52px;height:52px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:2.4rem;
+  filter:drop-shadow(2px 2px 3px rgba(0,0,0,.2));
+}
+.shapes-sort-container .bucket-count{
+  font-family:'Fredoka One',cursive;font-size:.95rem;
+  background:rgba(255,255,255,.35);
+  border-radius:20px;padding:2px 10px;
+  color:#fff;
+}
+/* Shapes tray */
+.shapes-sort-container .shapes-tray{
+  display:flex;flex-wrap:wrap;
+  justify-content:center;gap:14px;margin-bottom:20px;
+}
+.shapes-sort-container .shape-piece{
+  width:80px;height:80px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:3.2rem;
+  border-radius:18px;
+  background:#fff;
+  box-shadow:0 6px 0 rgba(0,0,0,.12);
+  cursor:pointer;
+  transition:transform .2s,box-shadow .2s;
+  animation:popIn .4s backwards;
+  user-select:none;
+  border:3px solid rgba(0,0,0,.07);
+}
+.shapes-sort-container .shape-piece:hover{transform:scale(1.12) rotate(-4deg);}
+.shapes-sort-container .shape-piece.selected{
+  transform:scale(1.18);
+  box-shadow:0 10px 0 rgba(0,0,0,.15),0 0 0 4px #fff,0 0 0 7px #FFD700;
+}
+.shapes-sort-container .shape-piece.gone{opacity:0;pointer-events:none;transform:scale(0);}
+@keyframes popIn{from{transform:scale(0) rotate(-15deg);opacity:0;}to{transform:scale(1) rotate(0);opacity:1;}}
+.shapes-sort-container .sort-result{
+  font-family:'Fredoka One',cursive;
+  font-size:1.9rem;min-height:52px;margin-top:8px;
+}
+.shapes-sort-container .btn-primary{
+  font-family:'Fredoka One',cursive;font-size:1.2rem;
+  padding:13px 30px;border:none;border-radius:50px;
+  background:var(--orange);color:#fff;cursor:pointer;
+  box-shadow:0 5px 0 #c96b00;
+  transition:transform .15s,box-shadow .15s;margin-top:16px;
+}
+.shapes-sort-container .btn-primary:hover{transform:translateY(-3px);box-shadow:0 8px 0 #c96b00;}
+.shapes-sort-container .btn-primary:active{transform:translateY(2px);box-shadow:0 2px 0 #c96b00;}
+
+/* ── LEARN TAB ── */
+.shapes-sort-container .shapes-learn-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+  gap:18px;
+}
+.shapes-sort-container .shape-learn-card{
+  border-radius:24px;padding:20px 10px;
+  text-align:center;cursor:pointer;
+  box-shadow:0 6px 0 rgba(0,0,0,.13);
+  animation:popIn .4s backwards;
+  border:4px solid rgba(255,255,255,.5);
+  transition:transform .2s;
+}
+.shapes-sort-container .shape-learn-card:hover{transform:scale(1.08) rotate(-2deg);}
+.shapes-sort-container .shape-learn-card .big-shape{
+  font-size:3.2rem;display:block;margin-bottom:10px;
+  transition:transform .3s;
+}
+.shapes-sort-container .shape-learn-card:hover .big-shape{transform:rotate(20deg) scale(1.15);}
+.shapes-sort-container .shape-learn-card .sname{
+  font-family:'Fredoka One',cursive;font-size:1.25rem;
+  color:#fff;text-shadow:1px 1px 4px rgba(0,0,0,.25);
+}
+.shapes-sort-container .shape-learn-card .sides{
+  font-size:.85rem;font-weight:800;
+  color:rgba(255,255,255,.85);margin-top:4px;
+}
+
+/* ── TRACE TAB ── */
+.shapes-sort-container #trace-wrap{text-align:center;}
+.shapes-sort-container .trace-shapes-nav{
+  display:flex;flex-wrap:wrap;
+  justify-content:center;gap:10px;margin-bottom:18px;
+}
+.shapes-sort-container .trace-nav-btn{
+  font-family:'Fredoka One',cursive;font-size:1rem;
+  padding:9px 18px;border:none;border-radius:50px;
+  color:#fff;cursor:pointer;
+  box-shadow:0 4px 0 rgba(0,0,0,.15);
+  transition:transform .2s;
+}
+.shapes-sort-container .trace-nav-btn.active{outline:3px solid #333;transform:scale(1.05);}
+.shapes-sort-container .trace-nav-btn:hover{transform:translateY(-2px);}
+.shapes-sort-container #trace-canvas-wrap{
+  display:inline-block;border-radius:24px;overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,.14);
+  border:5px solid #fff;background:#fff;
+  cursor:crosshair;max-width:100%;
+}
+.shapes-sort-container #trace-canvas-wrap canvas{display:block;max-width:100%; touch-action: none;}
+.shapes-sort-container .trace-controls{
+  display:flex;flex-wrap:wrap;
+  justify-content:center;gap:10px;margin-top:14px;
+}
+.shapes-sort-container .color-dot{
+  width:42px;height:42px;border-radius:50%;
+  border:3px solid rgba(255,255,255,.6);cursor:pointer;
+  box-shadow:0 4px 0 rgba(0,0,0,.13);
+  transition:transform .2s;
+}
+.shapes-sort-container .color-dot:hover{transform:scale(1.2);}
+.shapes-sort-container .color-dot.active{border:4px solid #333;transform:scale(1.2);}
+.shapes-sort-container .btn-clear{
+  font-family:'Fredoka One',cursive;font-size:1rem;
+  padding:10px 22px;border:none;border-radius:50px;
+  background:var(--red);color:#fff;cursor:pointer;
+  box-shadow:0 4px 0 #b02020;transition:transform .15s;
+}
+.shapes-sort-container .btn-clear:hover{transform:translateY(-2px);}
+
+/* ── QUIZ TAB ── */
+.shapes-sort-container #quiz-wrap{text-align:center;}
+.shapes-sort-container #quiz-question{
+  font-family:'Fredoka One',cursive;
+  font-size:clamp(1.4rem,4vw,2rem);color:#333;
+  margin-bottom:20px;
+}
+.shapes-sort-container #quiz-shape-display{
+  font-size:6rem;margin:0 auto 24px;
+  animation:spinBounce 1s ease;
+}
+@keyframes spinBounce{
+  0%{transform:scale(0) rotate(-180deg);}
+  70%{transform:scale(1.2) rotate(10deg);}
+  100%{transform:scale(1) rotate(0deg);}
+}
+.shapes-sort-container .quiz-opts{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:14px;max-width:440px;margin:0 auto;
+}
+.shapes-sort-container .quiz-opt{
+  font-family:'Fredoka One',cursive;font-size:1.3rem;
+  padding:16px 10px;border:none;border-radius:20px;
+  cursor:pointer;color:#fff;
+  box-shadow:0 5px 0 rgba(0,0,0,.15);
+  transition:transform .15s,box-shadow .15s;
+}
+.shapes-sort-container .quiz-opt:hover{transform:translateY(-3px);box-shadow:0 8px 0 rgba(0,0,0,.15);}
+.shapes-sort-container .quiz-opt:active{transform:translateY(2px);}
+.shapes-sort-container .quiz-opt.correct{outline:5px solid #2ecc71;}
+.shapes-sort-container .quiz-opt.wrong{outline:5px solid #e74c3c;opacity:.6;}
+.shapes-sort-container #quiz-feedback{
+  font-family:'Fredoka One',cursive;font-size:2rem;
+  min-height:56px;margin:14px 0;
+}
+.shapes-sort-container #quiz-score{font-size:1.1rem;font-weight:800;color:#888;margin-bottom:10px;}
+
+/* STAR */
+.star{position:fixed;pointer-events:none;font-size:2rem;z-index:9999;animation:starFly 1s forwards;}
+@keyframes starFly{0%{opacity:1;transform:translateY(0) scale(1);}100%{opacity:0;transform:translateY(-120px) scale(1.8);}}

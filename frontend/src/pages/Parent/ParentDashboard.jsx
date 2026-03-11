@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ParentLayout from '../../layouts/ParentLayout';
 import StatCard from '../../components/dashboard/StatCard';
 import ProfileCard from '../../components/dashboard/ProfileCard';
+import { EditChildModal, ViewInfoModal } from '../Parent/ChildProfilesPage';
 import SimpleBarChart from '../../components/dashboard/SimpleBarChart';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Clock, Star, Brain, AlertCircle, Plus, Users, ArrowRight } from 'lucide-react';
 import Button from '../../components/ui/Button';
 import { useAuth } from '../../hooks/useAuth';
 
 const ParentDashboard = () => {
     const navigate = useNavigate();
-    const { user, selectChild } = useAuth();
+    const { user, selectChild, updateChild } = useAuth();
+    const [editingChild, setEditingChild] = useState(null);
+    const [viewingChild, setViewingChild] = useState(null);
 
     // Fallback chart data
     const chartData = [
@@ -49,17 +53,17 @@ const ParentDashboard = () => {
             </div>
 
             {/* Stats Row */}
-            <div className="grid grid-auto-fit gap-6 mb-10">
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>
                 <StatCard icon={Clock} label="Total Screen Time" value="2h 15m" trend={-5} color="#63B3ED" />
                 <StatCard icon={Brain} label="Activities Done" value="12" trend={15} color="#9F7AEA" />
                 <StatCard icon={Star} label="Skills Mastered" value="5" trend={8} color="#F687B3" />
             </div>
 
             {/* Main Content Grid - 2/3 + 1/3 Layout */}
-            <div className="dashboard-grid gap-8 items-start">
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem', alignItems: 'flex-start' }}>
 
                 {/* LEFT COLUMN */}
-                <div className="flex flex-col gap-8">
+                <div style={{ flex: '2 1 600px', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
 
                     {/* Activity Section */}
                     <div className="card">
@@ -109,7 +113,7 @@ const ParentDashboard = () => {
                         <h3 className="text-lg font-bold mb-4 ml-1 flex items-center gap-2">
                             <AlertCircle size={20} className="text-orange-500" /> Recent Alerts
                         </h3>
-                        <div className="flex flex-col gap-4">
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                             {/* Mock Alert 1 */}
                             <div className="card p-5 flex items-start gap-4" style={{ borderLeft: '4px solid #F56565' }}>
                                 <div className="p-2 bg-red-50 rounded-lg text-red-500">
@@ -141,7 +145,7 @@ const ParentDashboard = () => {
                 </div>
 
                 {/* RIGHT COLUMN */}
-                <div className="flex flex-col gap-8">
+                <div style={{ flex: '1 1 300px', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                     <div>
                         <div className="flex-between mb-4 ml-1">
                             <h3 className="text-lg font-bold">My Kids</h3>
@@ -150,7 +154,7 @@ const ParentDashboard = () => {
                             </Button>
                         </div>
 
-                        <div className="flex flex-col gap-4">
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                             {/* Dynamic Child List */}
                             {user?.children?.length > 0 ? (
                                 user.children.map((child) => (
@@ -162,6 +166,8 @@ const ParentDashboard = () => {
                                         avatar={child.avatar}
                                         progress={Math.floor(Math.random() * 40) + 40} // Mock progress for now
                                         onLaunch={() => handleLaunchChild(child)}
+                                        onEdit={() => setEditingChild(child)}
+                                        onInfo={() => setViewingChild(child)}
                                     />
                                 ))
                             ) : (
@@ -208,17 +214,21 @@ const ParentDashboard = () => {
                 </div>
             </div>
 
-            <style>{`
-                .dashboard-grid {
-                    display: grid;
-                    grid-template-columns: 2fr 1fr;
-                }
-                @media (max-width: 1024px) {
-                    .dashboard-grid {
-                        grid-template-columns: 1fr;
-                    }
-                }
-            `}</style>
+            <AnimatePresence>
+                {editingChild && (
+                    <EditChildModal
+                        child={editingChild}
+                        onClose={() => setEditingChild(null)}
+                        onUpdate={updateChild}
+                    />
+                )}
+                {viewingChild && (
+                    <ViewInfoModal 
+                        child={viewingChild} 
+                        onClose={() => setViewingChild(null)} 
+                    />
+                )}
+            </AnimatePresence>
         </ParentLayout>
     );
 };

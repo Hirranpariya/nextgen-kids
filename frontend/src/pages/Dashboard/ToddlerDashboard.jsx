@@ -15,7 +15,9 @@ const ToddlerDashboard = () => {
     const childData = {
         name: child.name,
         age: child.age,
-        avatar: "🦁" // Default avatar for now
+        avatar: child.avatar || "🦁", // Ensure we pass the real avatar
+        dominantHand: child.dominantHand,
+        primaryLanguage: child.primaryLanguage
     };
 
     return (
@@ -23,15 +25,15 @@ const ToddlerDashboard = () => {
             <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
                 <ChildProfileHeader {...childData} />
 
-                <div className="grid gap-6" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem' }}>
                     {/* Left Main Column */}
-                    <div style={{ gridColumn: 'span 2', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                    <div style={{ flex: '2 1 600px', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                         <ActivityMatrix />
                         <ParentGuidance />
                     </div>
 
                     {/* Right Side Column */}
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                    <div style={{ flex: '1 1 300px', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                         <GrowthTracker />
                         <HabitBuilder />
                     </div>

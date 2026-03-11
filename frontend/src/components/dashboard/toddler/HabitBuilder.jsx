@@ -57,8 +57,8 @@ const HabitItem = ({ icon: Icon, label, color }) => {
 
 const HabitBuilder = () => {
     return (
-        <div className="card">
-            <h3 className="text-lg font-bold mb-4">Good Habits 🌟</h3>
+        <div className="card" style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            <h3 className="text-lg font-bold">Good Habits 🌟</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                 <HabitItem icon={() => <span>🦷</span>} label="Brush Teeth" color="#4299E1" />
                 <HabitItem icon={() => <span>🧼</span>} label="Wash Hands" color="#63B3ED" />

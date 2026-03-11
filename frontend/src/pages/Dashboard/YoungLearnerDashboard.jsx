@@ -19,6 +19,9 @@ const YoungLearnerDashboard = () => {
                     age={child.age}
                     gender={child.gender}
                     avatar={child.avatar}
+                    grade={child.gradeLevel || "Young Learner"}
+                    favoriteSubject={child.favoriteSubject}
+                    hobbies={child.hobbies}
                 />
 
                 <div className="grid-dashboard" style={{

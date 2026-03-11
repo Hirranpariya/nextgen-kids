@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ShieldCheck, BookOpen, Star } from 'lucide-react';
+import { ShieldCheck, BookOpen, Star, Activity, Heart } from 'lucide-react';
 
-const ProfileHeader = ({ name, age, grade = "5th Grade", avatar }) => {
+const ProfileHeader = ({ name, age, grade = "6th Grade", avatar, extracurriculars, hobbies }) => {
     return (
         <div style={{
             background: 'white', borderRadius: '12px', padding: '1.5rem',
@@ -15,7 +15,11 @@ const ProfileHeader = ({ name, age, grade = "5th Grade", avatar }) => {
                     display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2.5rem',
                     overflow: 'hidden'
                 }}>
-                    {avatar || '😎'}
+                    {avatar?.startsWith('data:image') ? (
+                        <img src={avatar} alt={`${name}'s avatar`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    ) : (
+                        avatar || '😎'
+                    )}
                 </div>
                 <div>
                     <div style={{
@@ -26,6 +30,21 @@ const ProfileHeader = ({ name, age, grade = "5th Grade", avatar }) => {
                     </div>
                     <h2 style={{ fontSize: '1.5rem', fontWeight: '700', color: '#1A202C', margin: 0 }}>{name}</h2>
                     <div style={{ fontSize: '0.9rem', color: '#718096', marginTop: '0.25rem' }}>{grade} • {age} Years Old</div>
+                    
+                    {(extracurriculars || hobbies) && (
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.75rem', flexWrap: 'wrap' }}>
+                            {extracurriculars && (
+                                <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', padding: '0.2rem 0.5rem', background: '#F0FFF4', color: '#276749', borderRadius: '6px', fontSize: '0.7rem', fontWeight: '700' }}>
+                                    <Activity size={10} /> {extracurriculars}
+                                </span>
+                            )}
+                            {hobbies && (
+                                <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', padding: '0.2rem 0.5rem', background: '#EBF8FF', color: '#2B6CB0', borderRadius: '6px', fontSize: '0.7rem', fontWeight: '700' }}>
+                                    <Heart size={10} /> {hobbies}
+                                </span>
+                            )}
+                        </div>
+                    )}
                 </div>
             </div>
 

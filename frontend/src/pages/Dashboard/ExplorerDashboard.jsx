@@ -24,7 +24,14 @@ const ExplorerDashboard = () => {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '1.5rem', alignItems: 'start' }}>
                 {/* Top Row: Profile & Stats */}
                 <div style={{ gridColumn: 'span 8' }}>
-                    <ProfileHeader name={child.name} age={child.age} avatar={child.avatar} />
+                    <ProfileHeader 
+                        name={child.name} 
+                        age={child.age} 
+                        avatar={child.avatar} 
+                        grade={child.gradeLevel || "6th Grade"}
+                        extracurriculars={child.extracurricularActivities}
+                        hobbies={child.hobbies}
+                    />
                 </div>
                 <div style={{ gridColumn: 'span 4' }}>
                     <WellnessPanel />
