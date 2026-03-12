@@ -28,11 +28,16 @@ export const AuthProvider = ({ children }) => {
 
     const [unlockedActivities, setUnlockedActivities] = useState(() => {
         try {
-            const stored = localStorage.getItem('nextgen_unlocked_activities');
-            return stored ? JSON.parse(stored) : ['fuel-mixer']; // Start with fuel mixer unlocked
+            // Clear any existing stored data to reset unlock state
+            localStorage.removeItem('nextgen_unlocked_activities');
+            localStorage.removeItem('nextgen_inventory');
+            localStorage.removeItem('nextgen_explorer_points');
+            
+            // Return initial state: Math activities + first Science activity
+            return ['fuel-mixer', 'balance-beam', 'area-architect', 'power-grid'];
         } catch (error) {
-            console.error("Failed to parse unlocked activities", error);
-            return ['fuel-mixer'];
+            console.error("Failed to initialize unlocked activities", error);
+            return ['fuel-mixer', 'balance-beam', 'area-architect', 'power-grid'];
         }
     });
 
