@@ -15,6 +15,37 @@ export const AuthProvider = ({ children }) => {
         }
     });
 
+    // New state for activities and inventory
+    const [inventory, setInventory] = useState(() => {
+        try {
+            const stored = localStorage.getItem('nextgen_inventory');
+            return stored ? JSON.parse(stored) : [];
+        } catch (error) {
+            console.error("Failed to parse inventory", error);
+            return [];
+        }
+    });
+
+    const [unlockedActivities, setUnlockedActivities] = useState(() => {
+        try {
+            const stored = localStorage.getItem('nextgen_unlocked_activities');
+            return stored ? JSON.parse(stored) : ['fuel-mixer']; // Start with fuel mixer unlocked
+        } catch (error) {
+            console.error("Failed to parse unlocked activities", error);
+            return ['fuel-mixer'];
+        }
+    });
+
+    const [explorerPoints, setExplorerPoints] = useState(() => {
+        try {
+            const stored = localStorage.getItem('nextgen_explorer_points');
+            return stored ? parseInt(stored) : 0;
+        } catch (error) {
+            console.error("Failed to parse explorer points", error);
+            return 0;
+        }
+    });
+
     // Simulate checking for a logged-in user on mount
     useEffect(() => {
         try {
@@ -114,8 +145,38 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
+    // Activity and inventory functions
+    const addToInventory = (item) => {
+        const newInventory = [...inventory, item];
+        setInventory(newInventory);
+        localStorage.setItem('nextgen_inventory', JSON.stringify(newInventory));
+    };
+
+    const unlockActivity = (activityId) => {
+        if (!unlockedActivities.includes(activityId)) {
+            const newUnlocked = [...unlockedActivities, activityId];
+            setUnlockedActivities(newUnlocked);
+            localStorage.setItem('nextgen_unlocked_activities', JSON.stringify(newUnlocked));
+        }
+    };
+
+    const addExplorerPoints = (points) => {
+        const newTotal = explorerPoints + points;
+        setExplorerPoints(newTotal);
+        localStorage.setItem('nextgen_explorer_points', newTotal.toString());
+    };
+
+    const completeActivity = (activityId, reward) => {
+        addToInventory(reward.item);
+        addExplorerPoints(reward.points);
+        unlockActivity(reward.unlocksNext);
+    };
+
     return (
-        <AuthContext.Provider value={{ user, login, register, logout, loading, activeChild, selectChild, exitChildMode, addChild, updateChild }}>
+        <AuthContext.Provider value={{ 
+            user, login, register, logout, loading, activeChild, selectChild, exitChildMode, addChild, updateChild,
+            inventory, unlockedActivities, explorerPoints, addToInventory, unlockActivity, addExplorerPoints, completeActivity
+        }}>
             {children}
         </AuthContext.Provider>
     );
