@@ -13,15 +13,15 @@ const SONGS = [
 
 // Cute Background Decor Component
 const CuteBackground = () => (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+    <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none', zIndex: 0 }}>
         {/* Sky Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#87CEEB] via-[#B0E0E6] to-[#FFF0F5]" />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, #87CEEB, #E9D5FF, #FEF08A)', opacity: 0.8 }} />
 
         {/* Playful Sun */}
         <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 100, repeat: Infinity, ease: "linear" }}
-            className="absolute top-10 right-10 md:top-20 md:right-32 w-32 h-32 md:w-48 md:h-48 drop-shadow-[0_0_30px_rgba(253,224,71,0.8)]"
+            style={{ position: 'absolute', top: '5rem', right: '8rem', width: '12rem', height: '12rem', filter: 'drop-shadow(0 0 30px rgba(253,224,71,0.8))' }}
         >
             <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="50" cy="50" r="30" fill="#FDE047" />
@@ -35,7 +35,7 @@ const CuteBackground = () => (
                 ))}
             </svg>
             {/* Happy Sun Face */}
-            <div className="absolute inset-0 flex items-center justify-center pt-2">
+            <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '0.5rem' }}>
                 <svg width="40" height="20" viewBox="0 0 40 20" fill="none">
                     <circle cx="10" cy="5" r="3" fill="#854D0E" />
                     <circle cx="30" cy="5" r="3" fill="#854D0E" />
@@ -50,7 +50,7 @@ const CuteBackground = () => (
         <motion.div
             animate={{ x: [0, 50, 0] }}
             transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute top-32 left-10 md:left-40 w-48 opacity-90 drop-shadow-xl"
+            style={{ position: 'absolute', top: '8rem', left: '10rem', width: '12rem', opacity: 0.9, filter: 'drop-shadow(0 20px 13px rgba(0,0,0,0.03))' }}
         >
             <svg viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M50 80 Q50 90 60 90 L140 90 Q150 90 150 80 Q150 70 140 70 Q130 40 100 40 Q70 40 60 70 Q50 70 50 80 Z" fill="white" />
@@ -60,7 +60,7 @@ const CuteBackground = () => (
         <motion.div
             animate={{ x: [0, -40, 0] }}
             transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute top-64 right-20 w-64 opacity-80 drop-shadow-xl"
+            style={{ position: 'absolute', top: '16rem', right: '5rem', width: '16rem', opacity: 0.8, filter: 'drop-shadow(0 20px 13px rgba(0,0,0,0.03))' }}
         >
             <svg viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M50 80 Q50 90 60 90 L140 90 Q150 90 150 80 Q150 70 140 70 Q130 40 100 40 Q70 40 60 70 Q50 70 50 80 Z" fill="white" />
@@ -73,8 +73,10 @@ const CuteBackground = () => (
                 key={`star-${i}`}
                 animate={{ y: [-10, 10, -10], opacity: [0.3, 0.8, 0.3], rotate: [0, 45, 0] }}
                 transition={{ duration: 3 + i, repeat: Infinity, delay: i * 0.5 }}
-                className="absolute text-3xl opacity-50"
                 style={{
+                    position: 'absolute',
+                    fontSize: '1.875rem',
+                    opacity: 0.5,
                     left: `${20 + (i * 15)}%`,
                     top: `${40 + (i * 10)}%`,
                     color: i % 2 === 0 ? '#FEF08A' : '#FBCFE8'
@@ -111,90 +113,132 @@ const MusicTime = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: loaded ? 1 : 0 }}
             transition={{ duration: 0.5 }}
-            className="min-h-screen font-sans flex flex-col items-center relative overflow-hidden"
+            style={{ minHeight: '100vh', fontFamily: 'Nunito, sans-serif', display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative', overflow: 'hidden' }}
         >
             <style>
                 {`
                 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700;900&display=swap');
-                .font-nunito { font-family: 'Nunito', sans-serif; }
                 `}
             </style>
 
             <CuteBackground />
 
             {/* Top Header */}
-            <div className="w-full p-4 md:p-6 flex items-center bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
+            <div style={{ width: '100%', position: 'relative', padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 50 }}>
                 <button
                     onClick={() => navigate('/dashboard/toddler')}
-                    className="p-3 rounded-full bg-white hover:bg-slate-100 transition-colors mr-4 shadow-sm"
+                    style={{ position: 'absolute', left: '2rem', padding: '0.75rem', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.8)', backdropFilter: 'blur(4px)', boxShadow: '0 1px 2px 0 rgba(0,0,0,0.05)', border: 'none', cursor: 'pointer', transition: 'background-color 0.2s' }}
                 >
-                    <ArrowLeft size={28} className="text-slate-700" />
+                    <ArrowLeft size={28} color="#334155" />
                 </button>
-                <h1 className="text-2xl md:text-3xl font-black font-nunito text-slate-800 flex items-center gap-2 drop-shadow-sm">
-                    Nursery Rhymes <Music className="text-pink-500 animate-bounce" size={28} />
-                </h1>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <h1 style={{ fontSize: '2.25rem', fontWeight: 900, color: '#1e293b', margin: 0, textShadow: '0 1px 2px rgba(0,0,0,0.1)' }}>
+                        Nursery Rhymes
+                    </h1>
+                    <motion.div animate={{ y: [0, -5, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
+                        <Music color="#ec4899" size={32} />
+                    </motion.div>
+                </div>
             </div>
 
-            <div className="max-w-6xl mx-auto w-full pb-20 flex flex-col items-center relative z-10">
-                {/* Main Video Section (Top) - Increased Width to 90% */}
-                <div ref={videoRef} className="w-full flex flex-col items-center pt-8 px-4">
+            {/* Main Content Container */}
+            <div style={{ width: '100%', maxWidth: '1000px', margin: '0 auto', padding: '0 1.5rem', position: 'relative', zIndex: 10, display: 'flex', flexDirection: 'column', paddingBottom: '5rem' }}>
+
+                {/* 40px Spacing between Header and Video */}
+                <div style={{ height: '40px' }}></div>
+
+                {/* Video Player Section */}
+                <div ref={videoRef} style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                     <motion.div
                         key={activeSong.id}
-                        initial={{ scale: 0.95, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ type: "spring", bounce: 0.4 }}
-                        className="w-[95%] md:w-[90%] xl:w-[85%] aspect-video rounded-[32px] overflow-hidden shadow-[0_25px_50px_rgba(0,0,0,0.25)] bg-slate-900 border-[12px] border-white relative group"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4 }}
+                        style={{ width: '80%', aspectRatio: '16/9', borderRadius: '1rem', overflow: 'hidden', boxShadow: '0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04)', backgroundColor: 'black', position: 'relative', border: '4px solid rgba(255,255,255,0.5)' }}
                     >
                         <iframe
-                            className="w-full h-full absolute inset-0"
+                            style={{ width: '100%', height: '100%', position: 'absolute', inset: 0, borderRadius: '1rem', border: 'none' }}
                             src={`https://www.youtube-nocookie.com/embed/${activeSong.videoId}?autoplay=1&rel=0&modestbranding=1`}
                             title={activeSong.title}
-                            frameBorder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowFullScreen
                         ></iframe>
-                        {/* Soft glow behind the video */}
-                        <div className="absolute inset-0 rounded-[20px] shadow-[inset_0_0_50px_rgba(0,0,0,0.5)] pointer-events-none" />
                     </motion.div>
 
-                    <h2 className="text-3xl md:text-5xl font-black font-nunito mt-8 text-slate-800 text-center drop-shadow-md px-4 flex items-center gap-4 bg-white/60 backdrop-blur-sm px-8 py-4 rounded-full border-4 border-white mt-10">
-                        <span className="text-5xl">{activeSong.icon}</span> {activeSong.title}
-                    </h2>
+                    {/* Rhyme Title Below Video */}
+                    <div style={{ marginTop: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', backgroundColor: 'rgba(255,255,255,0.6)', backdropFilter: 'blur(4px)', padding: '0.75rem 1.5rem', borderRadius: '9999px', boxShadow: '0 1px 2px 0 rgba(0,0,0,0.05)', border: '1px solid white' }}>
+                        <span style={{ fontSize: '1.875rem' }}>⭐</span>
+                        <h2 style={{ fontSize: '2.25rem', fontWeight: 900, color: '#1e293b', textAlign: 'center', margin: 0, textShadow: '0 1px 2px rgba(0,0,0,0.1)' }}>
+                            {activeSong.title}
+                        </h2>
+                        <span style={{ fontSize: '1.875rem' }}>⭐</span>
+                    </div>
                 </div>
 
+                {/* 40px Spacing between Video and List */}
                 <div style={{ height: '40px' }}></div>
 
-                {/* Rhymes List Section (Below Video) */}
-                <div className="w-[95%] md:w-[85%] lg:w-[80%] mx-auto px-4 flex flex-col gap-[20px]">
+                {/* Rhymes List Section */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', width: '100%', margin: '0 auto' }}>
                     {SONGS.map((song) => {
                         const isActive = activeSong.id === song.id;
                         return (
                             <motion.div
                                 key={song.id}
-                                whileHover={{ scale: 1.02, y: -4 }}
+                                whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
                                 onClick={() => handleSelectSong(song)}
-                                className={`
-                                    w-full p-[20px] rounded-[24px] flex items-center gap-5 cursor-pointer
-                                    transition-all duration-300 border-4 border-white/50
-                                    ${isActive ? 'ring-8 ring-pink-400 ring-offset-4 scale-[1.02] bg-white' : ''}
-                                `}
                                 style={{
-                                    backgroundColor: isActive ? '#FFFFFF' : song.bg,
-                                    boxShadow: `0 8px 0 0 ${song.shadow}, 0 15px 20px rgba(0,0,0,0.15)`
+                                    width: '100%',
+                                    minHeight: '110px',
+                                    padding: '20px',
+                                    borderRadius: '1rem',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'space-between',
+                                    cursor: 'pointer',
+                                    transition: 'all 0.3s ease',
+                                    border: '1px solid rgba(255,255,255,0.4)',
+                                    backgroundColor: song.bg,
+                                    boxShadow: `0 4px 6px rgba(0, 0, 0, 0.1), 0 8px 0 0 ${song.shadow}`,
+                                    ...(isActive ? { outline: '4px solid white', outlineOffset: '2px' } : {})
                                 }}
                             >
-                                <div className="text-6xl sm:text-7xl md:text-8xl leading-none drop-shadow-md w-28 text-center bg-white/30 rounded-full p-2">
-                                    {song.icon}
-                                </div>
-                                <div className="flex-1 flex flex-col justify-center ml-4">
-                                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-800 font-nunito leading-tight">
-                                        {song.title}
-                                    </h3>
-                                    <div className="flex items-center gap-2 mt-4 bg-white/90 hover:bg-white w-fit px-6 py-3 rounded-full font-bold text-slate-700 transition-colors shadow-md border-2 border-slate-100">
-                                        <Play size={28} className="text-rose-500 animate-[bounce_2s_infinite]" fill="currentColor" />
-                                        <span className="text-xl font-nunito">{isActive ? "Playing Now!" : "Play Video"}</span>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flex: 1, minWidth: 0 }}>
+                                    {/* Large Emoji */}
+                                    <div style={{ fontSize: '3rem', backgroundColor: 'rgba(255,255,255,0.4)', borderRadius: '50%', width: '4rem', height: '4rem', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, filter: 'drop-shadow(0 4px 3px rgba(0,0,0,0.07))' }}>
+                                        {song.icon}
                                     </div>
+
+                                    {/* Title */}
+                                    <div style={{ flex: 1, minWidth: 0 }}>
+                                        <h3 style={{ fontSize: '1.5rem', fontWeight: 900, color: '#1e293b', margin: 0, lineHeight: 1.2, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                            {song.title}
+                                        </h3>
+                                    </div>
+                                </div>
+
+                                {/* Play Button */}
+                                <div style={{
+                                    marginLeft: '1rem',
+                                    flexShrink: 0,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '0.5rem',
+                                    borderRadius: '9999px',
+                                    padding: '0.75rem 1.5rem',
+                                    boxShadow: '0 1px 2px 0 rgba(0,0,0,0.05)',
+                                    border: '1px solid rgba(0,0,0,0.05)',
+                                    transition: 'transform 0.3s ease',
+                                    backgroundColor: isActive ? '#ec4899' : 'white',
+                                    color: isActive ? 'white' : '#334155'
+                                }}>
+                                    <motion.div animate={isActive ? { scale: [1, 1.2, 1] } : {}} transition={{ repeat: Infinity, duration: 1 }}>
+                                        <Play size={24} fill="currentColor" color={isActive ? "white" : "#f43f5e"} />
+                                    </motion.div>
+                                    <span style={{ fontSize: '1.125rem', fontWeight: 700, whiteSpace: 'nowrap', display: 'block' }}>
+                                        {isActive ? "Playing Now" : "Play"}
+                                    </span>
                                 </div>
                             </motion.div>
                         );

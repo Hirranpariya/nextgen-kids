@@ -94,9 +94,9 @@ const ActivityMatrix = () => {
                 gap: '2rem'
             }}>
                 {activities.map((act, i) => (
-                    <ActivityCard 
-                        key={i} 
-                        {...act} 
+                    <ActivityCard
+                        key={i}
+                        {...act}
                         onClick={() => act.route && navigate(act.route)}
                     />
                 ))}
