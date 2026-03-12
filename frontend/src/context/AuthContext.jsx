@@ -34,10 +34,10 @@ export const AuthProvider = ({ children }) => {
             localStorage.removeItem('nextgen_explorer_points');
             
             // Return initial state: Math activities + first Science activity
-            return ['fuel-mixer', 'balance-beam', 'area-architect', 'power-grid'];
+            return ['fuel-mixer', 'balance-beam', 'area-architect', 'power-grid', 'formal-flyer', 'tense-transformer', 'word-root-tree', 'pattern-code', 'direction-detective', 'number-pyramid'];
         } catch (error) {
             console.error("Failed to initialize unlocked activities", error);
-            return ['fuel-mixer', 'balance-beam', 'area-architect', 'power-grid'];
+            return ['fuel-mixer', 'balance-beam', 'area-architect', 'power-grid', 'formal-flyer', 'tense-transformer', 'word-root-tree', 'pattern-code', 'direction-detective', 'number-pyramid'];
         }
     });
 
