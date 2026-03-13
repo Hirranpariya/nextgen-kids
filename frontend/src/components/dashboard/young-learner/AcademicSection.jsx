@@ -1,11 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { BookOpen, Calculator, Binary, Microscope, ArrowRight } from 'lucide-react';
 import Button from '../../ui/Button';
 
-const SubjectCard = ({ title, icon: Icon, color, bg }) => (
+const SubjectCard = ({ title, icon: Icon, color, bg, onClick }) => (
     <motion.div
         whileHover={{ y: -5 }}
+        onClick={onClick}
         style={{
             background: 'white',
             borderRadius: '16px',
@@ -15,7 +17,7 @@ const SubjectCard = ({ title, icon: Icon, color, bg }) => (
             display: 'flex',
             flexDirection: 'column',
             gap: '1rem',
-            cursor: 'pointer'
+            cursor: onClick ? 'pointer' : 'default'
         }}
     >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -42,6 +44,8 @@ const SubjectCard = ({ title, icon: Icon, color, bg }) => (
 );
 
 const AcademicSection = () => {
+    const navigate = useNavigate();
+
     return (
         <div style={{ background: 'white', padding: '1.5rem', borderRadius: '20px', border: '1px solid #E2E8F0', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
@@ -55,10 +59,34 @@ const AcademicSection = () => {
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem' }}>
-                <SubjectCard title="Reading & Stories" icon={BookOpen} color="#DD6B20" bg="#FBD38D" />
-                <SubjectCard title="Fun Math" icon={Calculator} color="#38A169" bg="#9AE6B4" />
-                <SubjectCard title="Think & Learn" icon={Binary} color="#805AD5" bg="#D6BCFA" />
-                <SubjectCard title="Basic Science" icon={Microscope} color="#3182CE" bg="#90CDF4" />
+                <SubjectCard
+                    title="Reading & Stories"
+                    icon={BookOpen}
+                    color="#DD6B20"
+                    bg="#FBD38D"
+                    onClick={() => navigate('/dashboard/young-learner/activities/reading-stories')}
+                />
+                <SubjectCard
+                    title="Fun Math"
+                    icon={Calculator}
+                    color="#38A169"
+                    bg="#9AE6B4"
+                    onClick={() => navigate('/dashboard/young-learner/activities/fun-math')}
+                />
+                <SubjectCard
+                    title="Think & Learn"
+                    icon={Binary}
+                    color="#805AD5"
+                    bg="#D6BCFA"
+                    onClick={() => navigate('/dashboard/young-learner/activities/think-learn')}
+                />
+                <SubjectCard
+                    title="Basic Science"
+                    icon={Microscope}
+                    color="#3182CE"
+                    bg="#90CDF4"
+                    onClick={() => navigate('/dashboard/young-learner/activities/basic-science')}
+                />
             </div>
         </div>
     );

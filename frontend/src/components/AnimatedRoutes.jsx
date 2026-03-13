@@ -13,6 +13,10 @@ import ChildProfilesPage from '../pages/Parent/ChildProfilesPage';
 import ToddlerDashboard from '../pages/Dashboard/ToddlerDashboard';
 import YoungLearnerDashboard from '../pages/Dashboard/YoungLearnerDashboard';
 import ExplorerDashboard from '../pages/Dashboard/ExplorerDashboard';
+import ReadingStoriesPage from '../pages/Dashboard/YoungLearner/Activities/ReadingStoriesPage';
+import FunMathPage from '../pages/Dashboard/YoungLearner/Activities/FunMathPage';
+import ThinkLearnPage from '../pages/Dashboard/YoungLearner/Activities/ThinkLearnPage';
+import BasicSciencePage from '../pages/Dashboard/YoungLearner/Activities/BasicSciencePage';
 import PageTransition from '../components/ui/PageTransition';
 import WellnessPage from '../pages/Parent/WellnessPage';
 import Community from '../pages/Parent/Community';
@@ -39,6 +43,11 @@ const AnimatedRoutes = () => {
                 <Route path="/parent/notifications" element={<PageTransition><NotificationsPage /></PageTransition>} />
                 <Route path="/dashboard/toddler" element={<PageTransition><ToddlerDashboard /></PageTransition>} />
                 <Route path="/dashboard/young-learner" element={<PageTransition><YoungLearnerDashboard /></PageTransition>} />
+                <Route path="/dashboard/young-learner/activities/reading-stories" element={<PageTransition><ReadingStoriesPage /></PageTransition>} />
+                <Route path="/dashboard/young-learner/activities/reading-stories" element={<PageTransition><ReadingStoriesPage /></PageTransition>} />
+                <Route path="/dashboard/young-learner/activities/fun-math" element={<PageTransition><FunMathPage /></PageTransition>} />
+                <Route path="/dashboard/young-learner/activities/think-learn" element={<PageTransition><ThinkLearnPage /></PageTransition>} />
+                <Route path="/dashboard/young-learner/activities/basic-science" element={<PageTransition><BasicSciencePage /></PageTransition>} />
                 <Route path="/dashboard/explorer" element={<PageTransition><ExplorerDashboard /></PageTransition>} />
                 <Route path="/parent/child/:id" element={<PageTransition><ChildDetailsPage /></PageTransition>} />
                 <Route path="/parent/growth" element={<PageTransition><GrowthTrackerPage /></PageTransition>} />
