@@ -1,0 +1,9 @@
+# Node modules
+frontend/node_modules/
+
+# Build outputs
+frontend/dist/
+
+# IDE + OS
+.vscode/
+.DS_Store
