@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Mail, Lock, ArrowRight } from 'lucide-react';
+import { User, Lock, ArrowRight } from 'lucide-react';
 import Button from '../../components/ui/Button';
 import Input from '../../components/ui/Input';
 import { useAuth } from '../../hooks/useAuth';
@@ -8,14 +8,14 @@ import { useAuth } from '../../hooks/useAuth';
 const LoginPage = () => {
     const { login } = useAuth();
     const navigate = useNavigate();
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            await login(email, password);
+            await login(username, password);
             navigate('/parent/dashboard');
         } catch (err) {
             setError('Invalid credentials');
@@ -45,16 +45,16 @@ const LoginPage = () => {
                 <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
                     <div style={{ background: '#ebf8ff', padding: '0.5rem', borderRadius: '8px', fontSize: '0.8rem', color: '#2c5282', textAlign: 'center' }}>
                         <strong>Demo Credentials:</strong><br />
-                        Email: demo@parent.com<br />
+                        Username: demoparent<br />
                         Pass: password123
                     </div>
 
                     <Input
-                        label="Email Address"
-                        placeholder="demo@parent.com"
-                        icon={Mail}
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        label="Username"
+                        placeholder="demoparent"
+                        icon={User}
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
                         autoFocus
                     />
 
@@ -68,7 +68,7 @@ const LoginPage = () => {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                         <div style={{ textAlign: 'right' }}>
-                            <a href="#" style={{ fontSize: '0.875rem', color: 'var(--color-primary)', fontWeight: '600' }}>Forgot Pin?</a>
+                            <a href="#" style={{ fontSize: '0.875rem', color: 'var(--color-primary)', fontWeight: '600' }}>Forgot Password?</a>
                         </div>
                     </div>
 
