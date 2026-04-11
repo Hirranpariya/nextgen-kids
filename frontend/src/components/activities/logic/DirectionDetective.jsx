@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import BackButton from '../../ui/BackButton';
 import { Compass, Navigation, CheckCircle, AlertCircle, Trophy, RotateCcw, Clock, Zap, ArrowUp, ArrowDown, ArrowLeft, ArrowRight } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
@@ -274,6 +275,7 @@ const DirectionDetective = ({ onComplete, onUnlockNext }) => {
 
             {/* Header */}
             <div style={{ marginBottom: '2rem' }}>
+                <BackButton theme="explorer" onClick={() => onComplete?.()} />
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
                     <Navigation size={32} color="#FCD34D" />
                     <div>

@@ -5,6 +5,7 @@ import GrowthTracker from '../../components/dashboard/toddler/GrowthTracker';
 import ActivityMatrix from '../../components/dashboard/toddler/ActivityMatrix';
 import HabitBuilder from '../../components/dashboard/toddler/HabitBuilder';
 import ParentGuidance from '../../components/dashboard/toddler/ParentGuidance';
+import AIAssistant from '../../components/dashboard/AIAssistant';
 
 const ToddlerDashboard = () => {
     const { user, activeChild } = useAuth();
@@ -21,6 +22,7 @@ const ToddlerDashboard = () => {
     };
 
     return (
+        <>
         <ToddlerLayout>
             <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
                 <ChildProfileHeader {...childData} />
@@ -40,6 +42,8 @@ const ToddlerDashboard = () => {
                 </div>
             </div>
         </ToddlerLayout>
+        <AIAssistant ageGroup="toddler" childName={child.name} />
+        </>
     );
 };
 

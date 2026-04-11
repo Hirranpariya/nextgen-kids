@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import BackButton from '../../../../components/ui/BackButton';
 import './ShapesSort.css';
 
 const SHAPES = [
@@ -266,14 +266,7 @@ const ShapesSort = () => {
         <div className="shapes-sort-container">
             {/* Header */}
             <header>
-                <button 
-                    onClick={() => navigate('/dashboard/toddler')}
-                    className="absolute top-4 left-4 py-2 px-4 rounded-full bg-white text-blue-500 font-black text-lg border-4 border-white shadow-[0_4px_0_rgba(0,0,0,0.2)] hover:-translate-y-1 hover:shadow-[0_6px_0_rgba(0,0,0,0.2)] active:translate-y-1 active:shadow-none transition-all z-50 flex items-center gap-2"
-                    style={{ fontFamily: "'Fredoka One', cursive" }}
-                >
-                    <ArrowLeft size={24} strokeWidth={3} />
-                    Back
-                </button>
+                <BackButton to="/dashboard/toddler" theme="toddler" />
                 <div className="bubbles">
                     {[...Array(10)].map((_, i) => (
                         <div key={i} className="bubble" style={{

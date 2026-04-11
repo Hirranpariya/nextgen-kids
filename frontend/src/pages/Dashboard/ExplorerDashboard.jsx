@@ -7,12 +7,14 @@ import AcademicZone from '../../components/dashboard/explorer/AcademicZone';
 import TimeManagement from '../../components/dashboard/explorer/TimeManagement';
 import AdvancedGrowthTracker from '../../components/dashboard/explorer/AdvancedGrowthTracker';
 import DigitalSafety from '../../components/dashboard/explorer/DigitalSafety';
+import AIAssistant from '../../components/dashboard/AIAssistant';
 
 const ExplorerDashboard = () => {
     const { user, activeChild } = useAuth();
     const child = activeChild || user?.children?.[0] || { name: "Jordan", age: 10, avatar: "😎" };
 
     return (
+        <>
         <ExplorerLayout>
             <div style={{ marginBottom: '2rem' }}>
                 <h1 style={{ fontSize: '1.75rem', fontWeight: '700', color: '#1A202C', letterSpacing: '-0.02em', marginBottom: '0.25rem' }}>
@@ -66,6 +68,8 @@ const ExplorerDashboard = () => {
                 }
             `}</style>
         </ExplorerLayout>
+        <AIAssistant ageGroup="explorer" childName={child.name} />
+        </>
     );
 };
 

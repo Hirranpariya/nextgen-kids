@@ -1,0 +1,10 @@
+﻿diff --git a/.gitignore b/.gitignore
+index 0db0893..e2c53ea 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -7,3 +7,5 @@ frontend/dist/
+ # IDE + OS
+ .vscode/
+ .DS_Store
++.env
++.env.local

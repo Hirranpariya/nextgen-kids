@@ -4,6 +4,7 @@ import ParentLayout from '../../layouts/ParentLayout';
 import StatCard from '../../components/dashboard/StatCard';
 import ProfileCard from '../../components/dashboard/ProfileCard';
 import { EditChildModal, ViewInfoModal } from '../Parent/ChildProfilesPage';
+import AIAssistant from '../../components/dashboard/AIAssistant';
 import SimpleBarChart from '../../components/dashboard/SimpleBarChart';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Clock, Star, Brain, AlertCircle, Plus, Users, ArrowRight } from 'lucide-react';
@@ -54,9 +55,15 @@ const ParentDashboard = () => {
 
             {/* Stats Row */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>
-                <StatCard icon={Clock} label="Total Screen Time" value="2h 15m" trend={-5} color="#63B3ED" />
-                <StatCard icon={Brain} label="Activities Done" value="12" trend={15} color="#9F7AEA" />
-                <StatCard icon={Star} label="Skills Mastered" value="5" trend={8} color="#F687B3" />
+                <div onClick={() => navigate('/parent/wellness')} style={{ cursor: 'pointer' }}>
+                    <StatCard icon={Clock} label="Total Screen Time" value="2h 15m" trend={-5} color="#63B3ED" />
+                </div>
+                <div onClick={() => navigate('/parent/learning')} style={{ cursor: 'pointer' }}>
+                    <StatCard icon={Brain} label="Activities Done" value="12" trend={15} color="#9F7AEA" />
+                </div>
+                <div onClick={() => navigate('/parent/growth')} style={{ cursor: 'pointer' }}>
+                    <StatCard icon={Star} label="Skills Mastered" value="5" trend={8} color="#F687B3" />
+                </div>
             </div>
 
             {/* Main Content Grid - 2/3 + 1/3 Layout */}
@@ -207,7 +214,7 @@ const ParentDashboard = () => {
                                 <span className="font-bold text-purple-600">Reading Level 2</span>
                             </div>
                             <div className="pt-2 mt-2">
-                                <Button variant="ghost" size="sm" icon={ArrowRight} style={{ width: '100%', justifyContent: 'center' }}>View Full Report</Button>
+                                <Button variant="ghost" size="sm" icon={ArrowRight} style={{ width: '100%', justifyContent: 'center' }} onClick={() => navigate('/parent/learning')}>View Full Report</Button>
                             </div>
                         </div>
                     </div>
@@ -229,6 +236,8 @@ const ParentDashboard = () => {
                     />
                 )}
             </AnimatePresence>
+            
+            <AIAssistant ageGroup="explorer" childName="Family" />
         </ParentLayout>
     );
 };

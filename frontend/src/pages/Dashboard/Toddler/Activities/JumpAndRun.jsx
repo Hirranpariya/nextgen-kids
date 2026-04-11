@@ -297,9 +297,7 @@ const JumpAndRun = () => {
 
             {/* Header */}
             <div style={{ width: '100%', padding: '1.5rem', display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center', justifyContent: 'space-between', zIndex: 40, position: 'sticky', top: 0 }}>
-                <button onClick={() => navigate('/dashboard/toddler')} className="btn-squishy" style={{ padding: '1rem', borderRadius: '50%', color: '#334155' }}>
-                    <ArrowLeft size={32} strokeWidth={3} />
-                </button>
+                <BackButton to="/dashboard/toddler" theme="toddler" />
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginLeft: 'auto' }}>
                     <button onClick={toggleSound} className="btn-squishy" style={{ padding: '1rem', borderRadius: '50%', color: '#334155' }}>
                         {soundEnabled ? <Volume2 size={32} strokeWidth={3} /> : <VolumeX size={32} strokeWidth={3} color="#f43f5e" />}

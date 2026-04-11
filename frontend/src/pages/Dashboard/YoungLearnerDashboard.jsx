@@ -5,6 +5,7 @@ import ProfileHeader from '../../components/dashboard/young-learner/ProfileHeade
 import AcademicSection from '../../components/dashboard/young-learner/AcademicSection';
 import GrowthTracker from '../../components/dashboard/young-learner/GrowthTracker';
 import HabitBuilder from '../../components/dashboard/young-learner/HabitBuilder';
+import AIAssistant from '../../components/dashboard/AIAssistant';
 
 const YoungLearnerDashboard = () => {
     const { user, activeChild } = useAuth();
@@ -12,6 +13,7 @@ const YoungLearnerDashboard = () => {
     const child = activeChild || user?.children?.[0] || { name: "Alex", age: 7, gender: "Boy", avatar: "👦" };
 
     return (
+        <>
         <YoungLearnerLayout>
             <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
                 <ProfileHeader
@@ -56,6 +58,8 @@ const YoungLearnerDashboard = () => {
                 }
             `}</style>
         </YoungLearnerLayout>
+        <AIAssistant ageGroup="youngLearner" childName={child.name} />
+        </>
     );
 };
 

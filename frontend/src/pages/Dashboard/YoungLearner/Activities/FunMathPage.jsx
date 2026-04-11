@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Calculator, Plus, X, Divide, Shapes } from 'lucide-react';
+import BackButton from '../../../../components/ui/BackButton';
 import Button from '../../../../components/ui/Button';
 import MathPractice from '../../../../components/activities/math/MathPractice';
 import MathGames from '../../../../components/activities/math/MathGames';
@@ -18,14 +19,7 @@ const FunMathPage = () => {
         <div style={{ minHeight: '100vh', background: '#F7FAFC', padding: '2rem' }}>
             {/* Header */}
             <div style={{ maxWidth: '1200px', margin: '0 auto', marginBottom: '2rem' }}>
-                <Button
-                    variant="ghost"
-                    onClick={() => navigate('/dashboard/young-learner')}
-                    style={{ marginBottom: '1rem' }}
-                >
-                    <ArrowLeft size={16} style={{ marginRight: '0.5rem' }} />
-                    Back to Dashboard
-                </Button>
+                <BackButton to="/dashboard/young-learner" theme="youngLearner" />
 
                 <h1 style={{
                     fontSize: '2rem',
